@@ -14,7 +14,8 @@ public class FizzBuzz {
     public static void main(String[] args) {
         
         if(args.length!=1) {
-            log.error("引数が1つではありません。引数には値が1以上の整数を1つ指定してください。");
+            System.err.println("引数が1つではありません。引数には値が1以上の整数を1つ指定してください。");
+            log.info("引数が1つ以外です。");
             return;
         }
         
@@ -22,7 +23,8 @@ public class FizzBuzz {
             int num = Integer.parseInt(args[0]);
             
             if(num <= 0) {
-                log.error("引数の値が0以下です。引数には値が1以上の整数を1つ入力してください。");
+                System.err.println("引数の値が0以下です。引数には値が1以上の整数を1つ入力してください。");
+                log.info("引数の値が1以上でありません。");
                 return;
             }
             
@@ -33,13 +35,16 @@ public class FizzBuzz {
             System.out.println("");
             
         } catch(NumberFormatException e) {
-            log.error("引数が整数ではありません。引数には値が1以上の整数を1つ入力してください。");
+            System.err.println("引数が整数ではありません。引数には値が1以上の整数を1つ入力してください。");
+            log.info("引数が整数ではありません。", e);
             return;
         }
         
     }
 
     private static String convertFizzBuzz(int i) {
+        if(i < 1) throw new IllegalArgumentException();
+        
         if(i % (FIZZ_BASE * BUZZ_BASE) == 0) {
             return "FizzBuzz";
         } else if (i % FIZZ_BASE == 0) {
